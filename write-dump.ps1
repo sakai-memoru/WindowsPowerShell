@@ -4,7 +4,7 @@ $document_directory = [environment]::GetFolderPath('mydocuments')
 
 ## variables
 $dtm_str2 = Get-Date -UFormat "%y/%m/%d %a %R"
-$dtm_str3 = get-date -Format "yyyy-MM-ddTHH:mm:ssK"
+$dtm_str3 = Get-Date -Format "yyyy-MM-ddTHH:mm:ssK"
 $dtm_str = $dtm_str3.Replace(":","_")
 $memo_file_name = $dtm_str + '_D.md'
 
@@ -20,6 +20,9 @@ file name: $memo_file_name
 ---
 # $memo_file_name
 - $dtm_str2
+
+## Question or Claim
+- 
 
 ## Facts (What)
 - 

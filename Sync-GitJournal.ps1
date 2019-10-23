@@ -1,7 +1,7 @@
 ﻿## constants
-$pomera_path = 'I:\Pomera'
-$pomera_pc_sync = 'G:\workplace\ml19b.wiki'
-$target_mdtxt = "*.md.txt"
+$pomera_path = 'I:\Pomera_memo'
+$pomera_pc_sync = 'G:\Users\sakai\OneDrive\Documents\journal'
+$target_txt = "*.txt"
 
 function Add-YamlHeader($file)
 {
@@ -9,14 +9,16 @@ function Add-YamlHeader($file)
   $ary = @()
   $created_dtm = $file.CreationTime
   $created_str = $created_dtm.ToString("yyyy-MM-ddTHH:mm:ssK")
-  $file_name_md = (Get-Title $file) + '.md'
+  $file_name = (Split-Path $file.fullname -leaf).Replace('.txt','')
   $template = @"
 ---
 created: $created_str
-file name: $file_name_md
+file name: $file_name
 ---
+# Pomera Diary
+
 "@
-  
+
   Get-Content $file.Fullname | set -Name lines
   foreach($line in $lines)
   {
@@ -36,64 +38,30 @@ file name: $file_name_md
   Write-Output $ary
 }
 
-function Replace-TitleForFileName($title)
-{
-  (($title.Replace(' ','_')).Replace(':','')).Replace('/','')
-}
-
-function Shorten-Title($title)
-{
-  if($title.Length -gt 34)
-  {
-    $title.Substring(0,34) + '…'
-  }
-  else
-  {
-    $title
-  }
-}
-
-function Get-Title($file)
-{
-  $ret = ($file.CreationTime).ToString("yyyyMMdd_HHmm_P")
-  $flg = $False
-  $file_name = $file.Fullname
-  Get-Content $file_name | set -Name lines
-  foreach($line in $lines)
-  {
-    if($line.StartsWith('# '))
-    {
-      $ret = Replace-TitleForFileName $line.Substring(2,$line.Length-2).Trim()
-      $flg = $True
-    }
-    if($flag) { Break }
-  }
-  ## return
-  $ret
-}
 
 function Run-Process()
 {
   echo '----------------Start ..'
-  dir $pomera_path -filter $target_mdtxt | set -name dir_list
+  $yyyyMM = Get-Date -f "yyyyMM"
+  $pomera_dairy_path = Join-Path $pomera_path $yyyyMM
+  
+  dir $pomera_dairy_path -filter $target_txt |sort CreationTime | set -name dir_list
   
   foreach($f in $dir_list)
   {
     echo "target is $f"
     $lines = Add-YamlHeader $f
-    $title = Get-Title $f
-    $file_name_md = $title + '.md'
-    $file_name_txt = (Shorten-Title $title) + '.txt'
-    $file_path_pomora = Join-Path $pomera_path $file_name_txt
+    $file_name_txt = Split-Path $f.Fullname -leaf
+    $file_name_txt_chopLeft = $file_name_txt.Substring(2)
+    $file_name_md = $file_name_txt_chopLeft.Replace('.txt','_P.md')
+    $file_path_pomora = Join-Path $pomera_dairy_path $file_name_txt
     $file_path_pcsync = Join-Path $pomera_pc_sync $file_name_md
+    #echo $file_path_pcsync
     #echo $file_name_md
-    if(Test-Path $file_path_pcsync)
-    {
-      Remove-Item $file_path_pcsync
-    }
+    $lines = Add-YamlHeader $f
     Set-Content -Path $file_path_pomora -Value $lines -Encoding UTF8
-    Remove-Item $f.FullName
     Set-Content -Path $file_path_pcsync -Value $lines -Encoding UTF8
+    Set-ItemProperty -Path $file_path_pcsync -Name LastWriteTime -Value $f.CreationTime
   }
   if($dir_list.Count -eq 0){ echo 'target file is NONE.'}
   echo '----------------end ..//'
@@ -117,11 +85,5 @@ if(-not (Test-Path $pomera_pc_sync))
 }
 
 Run-Process
-
-## git commit
-cd $pomera_pc_sync
-git add .
-git commit -m 'sync from Pomera'
-git push origin master
 
 }

@@ -22,11 +22,8 @@ file name : $memo_file_name
 ## Dictation
 - 
 
-## GIANT STEP
-### 168
-- 
-
-### 168
+## Copy and Type
+### GIANT STEP 100
 - 
 
 ## Tani Key

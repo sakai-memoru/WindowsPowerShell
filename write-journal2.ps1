@@ -13,6 +13,7 @@ $template = @"
 created: $dtm_str2
 file name: $dtm_str.md
 ---
+
 # Diary
 
 "@

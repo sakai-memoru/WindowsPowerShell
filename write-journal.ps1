@@ -1,19 +1,19 @@
 ﻿## constant
-$macro = 'G:\Users\sakai\AppData\Roaming\sakura\jump-bottom.mac'
 $C_out_directory = 'journal'
 $document_directory = [environment]::GetFolderPath('mydocuments')
 
 ## variables
 $dtm_str = Get-Date -f "yyMMdd"
 $memo_file_name = $dtm_str + '.md'
-$dtm_str2 = get-date -Format "yyyy-MM-ddTHH:mm:ssK"
+$dtm_str2 = Get-Date -Format "yyyy-MM-ddTHH:mm:ssK"
 
 ## template
 $template = @"
 ---
 created: $dtm_str2
 ---
-# $dtm_str.md
+
+# $dtm_str.md :
 
 "@
 

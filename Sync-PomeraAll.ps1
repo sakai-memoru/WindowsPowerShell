@@ -3,7 +3,7 @@
 echo 'RUN sync-gitjournal -------------'
 Run-Process
 
-. .\Sync-PomeraMemo.ps1
-echo 'RUN sync-PomeraMemo -------------'
+. .\Sync-Pomera.ps1
+echo 'RUN sync-Pomera -------------'
 Run-Process
 

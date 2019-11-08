@@ -9,6 +9,7 @@ $memo_file_name = $dtm_str + '.md'
 
 ## template
 $template = @"
+
 # $dtm_str.md
 
 "@
@@ -28,4 +29,4 @@ if(-not (test-path $memo_path))
   New-Item $memo_path -ItemType File -Value $template
 }
 
-sakura $memo_path -M=G:\Users\sakai\AppData\Roaming\sakura\insert-memo-line.mac
+sakura $memo_path -M=G:\Users\sakai\AppData\Roaming\sakura\insert-memo-line.js

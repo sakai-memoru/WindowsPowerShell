@@ -11,25 +11,27 @@ $dtm_str2 = get-date -Format "yyyy-MM-ddTHH:mm:ssK"
 ## template
 $template = @"
 ---
-created: $dtm_str2
-file name : $memo_file_name
+created: $dtm_str2  
+file name : $memo_file_name  
 ---
-# $memo_file_name
 
-## 78 pattern
+# $memo_file_name :
+
+## 78 pattern :
 - 
 
-## Dictation
+## Dictation :
 - 
 
-## Copy and Type
-### GIANT STEP 100
+## Copy and Type :
+### GIANT STEP 100 :
+#GIANTSTEP :
 - 
 
-## Tani Key
+## Tani Key :
 - 
 
-## Words
+## Words :
 - 
 
 "@
@@ -54,4 +56,4 @@ if(-not (test-path $memo_path))
   New-Item $memo_path -ItemType File -Value $template
 }
 
-sakura $memo_path -M=G:\Users\sakai\AppData\Roaming\sakura\insert-memo-line.mac
+sakura $memo_path

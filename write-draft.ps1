@@ -39,4 +39,4 @@ if(-not (test-path $memo_directory))
 
 Set-Clipboard $template
 
-sakura $memo_path -M=G:\Users\sakai\AppData\Roaming\sakura\paste_clipboard.mac
+sakura $memo_path -M=G:\Users\sakai\AppData\Roaming\sakura\paste_clipboard.js

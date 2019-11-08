@@ -14,7 +14,9 @@ function Add-YamlHeader($file)
 ---
 created: $created_str
 file name: $file_name
+
 ---
+
 # Pomera Diary
 
 "@

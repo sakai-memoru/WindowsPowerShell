@@ -1,6 +1,6 @@
 ﻿## constants
 $pomera_path = 'I:\Pomera'
-$pomera_pc_sync = 'G:\workplace\ml19b.wiki'
+$pomera_pc_sync = 'G:\Users\sakai\OneDrive\Documents\ml19b.wiki'
 $target_mdtxt = "*.md.txt"
 
 function Add-YamlHeader($file)
@@ -15,6 +15,7 @@ function Add-YamlHeader($file)
 created: $created_str
 file name: $file_name_md
 ---
+
 "@
   
   Get-Content $file.Fullname | set -Name lines

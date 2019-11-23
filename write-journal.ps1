@@ -1,4 +1,6 @@
-﻿## constant
+# write-journal.ps1
+# write-journal
+## constant
 $C_out_directory = 'journal'
 $document_directory = [environment]::GetFolderPath('mydocuments')
 
@@ -32,4 +34,4 @@ if(-not (test-path $memo_path))
   New-Item $memo_path -ItemType File -Value $template
 }
 
-sakura $memo_path -M=G:\Users\sakai\AppData\Roaming\sakura\insert-memo-line.mac
+sakura $memo_path -M=G:\Users\sakai\AppData\Roaming\sakura\insert_memoLineWithTemplate.jse
